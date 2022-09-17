@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/angel_island_1.ogg-90f95e5586eaceef634ce72df12f4451.oggstr"
+
+[deps]
+
+source_file="res://Audio/musics/angel_island_1.ogg"
+dest_files=[ "res://.import/angel_island_1.ogg-90f95e5586eaceef634ce72df12f4451.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

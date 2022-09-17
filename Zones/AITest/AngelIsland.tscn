@@ -1,0 +1,544 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Sprites/Zone/AngelTest/aiz1imgdry.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/PlayerCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/AngelTest/BackgroundWaterfall.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sprites/Zone/AngelTest/aiz1bgdry.png" type="Texture" id=5]
+[ext_resource path="res://General/MaskSetterRed.res" type="PackedScene" id=6]
+[ext_resource path="res://Sprites/Zone/AngelTest/Palettes/Waterfall/from.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Zone/AngelTest/Palettes/Waterfall/to1.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Zone/AngelTest/bgwater.png" type="Texture" id=9]
+[ext_resource path="res://Shaders/paletteswap.gdshader" type="Shader" id=10]
+[ext_resource path="res://Sprites/Zone/AngelTest/Palettes/Waterfall/to4.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Zone/AngelTest/Palettes/Waterfall/to3.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Zone/AngelTest/Palettes/Waterfall/to2.png" type="Texture" id=13]
+[ext_resource path="res://General/Scripts/animbgobj.gd" type="Script" id=14]
+[ext_resource path="res://Objects/Title Card.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Audio/musics/angel_island_1.ogg" type="AudioStream" id=16]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 744 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 745 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "anim"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 744 ), Vector2( -512, 744 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5, 5.1, 10 ),
+"transitions": PoolRealArray( 1, 0, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 745 ), Vector2( -512, 745 ), Vector2( 0, 745 ), Vector2( -512, 745 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 10 )
+shader_param/screen_mode = false
+shader_param/num_colors = 4
+shader_param/precision = 0.0
+shader_param/palette_in = ExtResource( 7 )
+shader_param/palette_out = ExtResource( 11 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "anim"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite2:material:shader_param/palette_out")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 8 ) ]
+}
+
+[node name="AngelIsland" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 2792, 24, 6784, 1664 )
+
+[node name="Waterfall" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2392, 647 )
+z_index = 2
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 185, 1052 )
+
+[node name="PlayerCamera" parent="." instance=ExtResource( 3 )]
+position = Vector2( 210, 970 )
+
+[node name="Full Coll" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Full Coll"]
+polygon = PoolVector2Array( 0, 1076, 48, 1072, 80, 1072, 112, 1075, 143, 1075, 159, 1072, 224, 1072, 240, 1075, 267, 1075, 290, 1069, 342, 1069, 370, 1075, 396, 1075, 416, 1072, 479.901, 1072, 497, 1075, 523, 1075, 543.238, 1072, 605, 1072, 626, 1075, 652, 1075, 671, 1072, 736, 1072, 754, 1075, 763, 1075, 960, 1024, 1015, 1024, 1023, 1021, 1034, 1021, 1041, 1024, 1056, 1024, 1280, 1136, 1408, 1136, 1423, 1136, 1440, 1131, 1448, 1128, 1464, 1120, 1473, 1112, 1481, 1104, 1488, 1096, 1493, 1088, 1497, 1080, 1498, 1072, 1534, 1072, 1545, 1074, 1554, 1072, 1580, 1072, 1595, 1066, 1610, 1066, 1657, 1073, 1671.56, 1072.93, 1723, 1066, 1733, 1066, 1749, 1071, 1768, 1072, 1782, 1074, 1807, 1074, 1839, 1070, 1856, 1064, 1856, 1044, 1920, 1040, 1920, 1008, 2176, 1008, 2306, 974, 2319, 974, 2356, 980, 2381, 980, 2416, 974, 2447, 973, 2488, 978, 2520, 978, 2547, 974, 2567, 974, 2581, 976, 2624, 979, 2624, 1056, 2544, 1056, 2544, 1168, 2192, 1168, 2192, 1264, 2304, 1264, 2304, 1232, 2544, 1232, 2588, 1232, 2607, 1234, 2654, 1234, 2685, 1230, 2816, 1264, 2944, 1264, 3072, 1200, 3103, 1200, 3136, 1192, 3136, 1171, 3168, 1168, 3264, 1168, 3264, 1107, 3296.18, 1104, 3584, 1104, 4096, 1232, 4160, 1264, 4288, 1264, 4288, 1328, 4544, 1328, 4544, 1392, 4656, 1392, 4784, 1336, 4848, 1328, 4928, 1328, 4928, 1200, 4992, 1200, 5120, 1264, 5272, 1264, 5304, 1248, 5328, 1224, 5336, 1200, 5440, 1200, 5440, 1104, 5552, 1104, 5552, 1296, 5520, 1296, 5520, 1392, 5616, 1392, 5616, 1296, 5584, 1296, 5584, 1104, 5696, 1104, 5696, 1136, 6160, 1136, 6176, 1131, 6200, 1120, 6216, 1106, 6225, 1094, 6231, 1084, 6236, 1071, 6240, 1040, 6240, 960, 6528, 1104, 6528, 472, 6784, 472, 6784, 1536, 5632, 1664, 1152, 1664, 0, 1408 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Full Coll"]
+polygon = PoolVector2Array( 3616, 929, 3904, 928, 3904, 880, 3968, 880, 4096, 912, 4416, 912, 4416, 1056, 4400, 1056, 4400, 1064, 4392, 1064, 4392, 1072, 4304, 1088, 4272, 1088, 4096, 1024, 4096, 1104, 4063, 1104, 4061, 1092, 4058, 1082, 4056, 1078, 4052, 1070, 4048, 1064, 4035, 1049, 4024, 1041, 4009, 1033, 3997, 1028, 3985, 1026, 3976, 1025, 3968, 1024, 3960, 1025, 3943, 1027, 3936, 1029, 3929, 1032, 3921, 1036, 3913, 1040, 3907, 1045, 3902, 1049, 3899, 1051, 3895, 1056, 3888, 1064, 3884, 1070, 3882, 1074, 3881, 1076, 3879, 1080, 3875, 1092, 3873, 1104, 3840, 1104, 3840, 1056, 3848, 1024, 3848, 1008, 3808, 1008, 3808, 1016, 3800, 1016, 3800, 1024, 3800, 1024, 3744, 1024, 3744, 1008, 3720, 1008, 3720.01, 1000, 3704, 1000, 3704, 1008, 3680, 1008, 3680, 1016, 3672, 1016, 3672, 1024, 3648, 1024, 3648.78, 1007.29, 3624, 1008, 3624, 1000, 3616, 1000 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Full Coll"]
+polygon = PoolVector2Array( 2240, 720, 2432, 720, 2624, 680, 2624, 656, 2832, 656, 2872, 640, 2976, 640, 3072, 688, 3136, 688, 3136, 592, 3456, 592, 3520, 608, 3776, 608, 3776, 712, 3768, 712, 3768, 720, 3744, 720, 3744, 728, 3736, 728, 3736, 736, 3712, 736, 3712, 744, 3704, 744, 3704, 752, 3680, 752, 3680, 736, 3632, 736, 3632, 744, 3624, 744, 3624, 752, 3568, 752, 3520, 784, 3448, 832, 2864, 832, 2776, 880, 2752, 880, 2688, 864, 2640, 832, 2608, 832, 2560, 848, 2536, 848, 2520, 880, 2496, 880, 2488, 864, 2416, 864, 2392, 880, 2368, 880, 2360, 864, 2304, 864, 2296, 832, 2264, 832, 2240, 816 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Full Coll"]
+polygon = PoolVector2Array( 4800, 880, 5120, 880, 5248, 816, 5440, 816, 5440, 752, 5504, 752, 5760, 816, 5808, 816, 5896, 848, 6016, 912, 6120, 936, 6208, 952, 6208, 1008, 4888, 976, 4800, 936 )
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Full Coll"]
+polygon = PoolVector2Array( 1024, 848, 1288, 848, 1344, 784, 1344, 720, 1152, 720, 1152, 464, 1280, 464, 1312, 592, 1408, 592, 2024, 592, 2112, 512, 2112, 464, 1920, 464, 1920, 336, 2320, 336, 2320, 560, 2432, 592, 2536, 592, 2704, 464, 3168, 464, 3200, 336, 3456, 336, 3488, 464, 3576, 472, 4216, 464, 4240, 560, 4384, 568, 4984, 368, 5016, 344, 5248, 344, 5504, 464, 5880, 464, 6112, 560, 6168, 560, 6280, 464, 6392, 464, 6528, 8, 1016, 0 )
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="Full Coll"]
+polygon = PoolVector2Array( 6016, 840, 6016, 736, 6272, 736, 6272, 864, 6240, 864, 6240, 851, 6236, 833, 6231, 820, 6225, 810, 6213, 795, 6209, 792, 6203, 787, 6197, 783, 6191, 780, 6183, 776, 6173, 772, 6152, 768, 6136, 768, 6115, 772, 6105, 776, 6095, 781, 6088, 785, 6080, 791, 6074, 796, 6064, 808, 6056, 824, 6049, 840 )
+
+[node name="Blue Coll" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blue Coll"]
+polygon = PoolVector2Array( 3840, 1104, 3848, 1136, 3856, 1152, 3856, 1172, 3916, 1187, 3890, 1163, 3889, 1161, 3886, 1157, 3879, 1144, 3877, 1139, 3875, 1132, 3873, 1120, 3872, 1111, 3873, 1104 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Blue Coll"]
+polygon = PoolVector2Array( 6016, 840, 6049, 840, 6048, 848, 6048, 864, 6055, 888, 6060, 898, 6067, 908, 6072, 914, 6079, 920, 6083, 923, 6088, 927, 6104, 936, 6056, 936 )
+
+[node name="Red Coll" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Red Coll"]
+polygon = PoolVector2Array( 4096, 1104, 4096, 1144, 4080, 1184, 4096, 1216, 4096, 1232, 3960, 1198, 3990, 1197, 3995, 1197, 4002, 1194, 4017, 1187, 4021, 1185, 4024, 1183, 4035, 1175, 4040, 1170, 4047, 1161, 4053, 1152, 4058, 1142, 4061, 1132, 4063, 1120, 4064, 1112, 4064, 1112, 4063, 1104 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Red Coll"]
+polygon = PoolVector2Array( 6168, 944, 6200, 927, 6212, 918, 6217, 912, 6227, 899, 6233, 888, 6240, 864, 6272, 864, 6224, 944 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_base_scale = Vector2( 0.5, 1 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 1 )
+motion_mirroring = Vector2( 512, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 0, 360 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 213, 512, 208 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.15, 1 )
+motion_mirroring = Vector2( 512, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 0, 568 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 429, 512, 48 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.2, 1 )
+motion_mirroring = Vector2( 512, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 0, 616 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 485, 512, 48 )
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.25, 1 )
+motion_mirroring = Vector2( 512, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2( 0, 664 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 541, 512, 26 )
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.25, 1 )
+motion_mirroring = Vector2( 512, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2( 0, 690 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 575, 512, 6 )
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.3, 1 )
+motion_mirroring = Vector2( 512, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer6"]
+position = Vector2( 0, 696 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 589, 512, 16 )
+
+[node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.35, 1 )
+motion_mirroring = Vector2( 512, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer7"]
+position = Vector2( 0, 712 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 613, 512, 16 )
+
+[node name="ParallaxLayer8" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.4, 1 )
+motion_mirroring = Vector2( 512, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer8"]
+position = Vector2( 0, 728 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 637, 512, 16 )
+
+[node name="ParallaxLayer9" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0, 1 )
+motion_mirroring = Vector2( 512, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="1" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 744 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 689, 512, 1 )
+
+[node name="2" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 745 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 690, 512, 1 )
+
+[node name="3" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 746 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 691, 512, 1 )
+
+[node name="4" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 747 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 692, 512, 1 )
+
+[node name="5" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 748 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 693, 512, 1 )
+
+[node name="6" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 749 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 694, 512, 1 )
+
+[node name="7" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 750 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 695, 512, 1 )
+
+[node name="8" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 751 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 696, 512, 1 )
+
+[node name="9" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 752 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 697, 512, 1 )
+
+[node name="10" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 753 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 698, 512, 1 )
+
+[node name="11" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 754 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 699, 512, 1 )
+
+[node name="12" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 755 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 700, 512, 1 )
+
+[node name="13" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 756 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 701, 512, 1 )
+
+[node name="14" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 757 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 702, 512, 1 )
+
+[node name="15" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 758 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 703, 512, 1 )
+
+[node name="16" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 759 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 704, 512, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/ParallaxLayer9"]
+anims/RESET = SubResource( 1 )
+anims/anim = SubResource( 2 )
+
+[node name="ParallaxLayer10" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.6, 1 )
+motion_mirroring = Vector2( 512, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer10"]
+position = Vector2( 0, 760 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 909, 512, 12 )
+
+[node name="ParallaxLayer11" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.65, 1 )
+motion_mirroring = Vector2( 512, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer11"]
+position = Vector2( 0, 772 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 929, 512, 6 )
+
+[node name="ParallaxLayer12" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.7, 1 )
+motion_mirroring = Vector2( 512, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer12"]
+position = Vector2( 0, 778 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 943, 512, 14 )
+
+[node name="ParallaxLayer13" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.75, 1 )
+motion_mirroring = Vector2( 512, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer13"]
+position = Vector2( 0, 792 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 965, 512, 80 )
+
+[node name="ParallaxLayer14" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.8, 1 )
+motion_mirroring = Vector2( 3840, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer14"]
+position = Vector2( 0, 872 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 1053, 3840, 40 )
+
+[node name="ParallaxLayer15" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.85, 1 )
+motion_mirroring = Vector2( 3840, 0 )
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer15"]
+position = Vector2( 0, 912 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 24, 1101, 3840, 344 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer15"]
+material = SubResource( 3 )
+position = Vector2( 528, 968 )
+texture = ExtResource( 9 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 276, 1116, 1504, 288 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/ParallaxLayer15"]
+anims/anim = SubResource( 4 )
+
+[node name="MaskSetterRed" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3830, 1134 )
+
+[node name="MaskSetterRed2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 6008, 880 )
+
+[node name="MaskSetterInvert" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4103, 1204 )
+SWITCH_MODE = 1
+
+[node name="MaskSetterInvert2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 6280, 944 )
+SWITCH_MODE = 1
+
+[node name="MaskSetterInvert3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 6224, 976 )
+rotation = 1.5708
+SWITCH_MODE = 1
+
+[node name="MaskSetterBlue" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3967, 1053 )
+SWITCH_MODE = 2
+
+[node name="MaskSetterBlue3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 6144, 800 )
+SWITCH_MODE = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Title Card" parent="CanvasLayer" instance=ExtResource( 15 )]
+LevelName = "Angel Island"
+Num = "1"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+volume_db = -5.0
+autoplay = true
